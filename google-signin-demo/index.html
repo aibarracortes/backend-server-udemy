@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Google SignIn Demo</title>
+
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+    <meta http-equiv="Cross-Origin-Opener-Policy" content="same-origin-allow-popups">
+</head>
+
+<body>
+    <script>
+        function handleCredentialResponse(response) {
+            console.log("Encoded JWT ID token: " + response.credential);
+        }
+        window.onload = function() {
+            google.accounts.id.initialize({
+                client_id: "736610133866-28d15ltfkbb0tc1r5ro34if0f706nbpn.apps.googleusercontent.com",
+                callback: handleCredentialResponse
+            });
+            google.accounts.id.renderButton(
+                document.getElementById("buttonDiv"), {
+                    theme: "outline",
+                    size: "large"
+                } // customization attributes
+            );
+            google.accounts.id.prompt(); // also display the One Tap dialog
+        }
+    </script>
+    <div id="buttonDiv"></div>
+    <!--
+    <div id="g_id_onload" data-client_id="736610133866-28d15ltfkbb0tc1r5ro34if0f706nbpn.apps.googleusercontent.com" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:4200" data-auto_prompt="false">
+    </div>
+
+    <div class="g_id_signin" data-type="standard" data-shape="rectangular" data-theme="outline" data-text="signin_with" data-size="large" data-locale="es" data-logo_alignment="left">
+    </div>
+-->
+</body>
+
+</html>
